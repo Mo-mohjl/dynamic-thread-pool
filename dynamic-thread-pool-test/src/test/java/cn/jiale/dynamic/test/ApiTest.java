@@ -20,7 +20,7 @@ public class ApiTest {
     private RTopic dynamicThreadPoolRedisTopic;
     @Test
     public void test_dynamicThreadPoolRedisTopic() throws InterruptedException {
-        ThreadPoolConfigEntity threadPoolConfigEntity = new ThreadPoolConfigEntity("dynamic-thread-pool-test-app", "threadPoolExecutor01");
+        ThreadPoolConfigEntity threadPoolConfigEntity = new ThreadPoolConfigEntity("dynamic-thread-pool-test-app", "threadPoolExecutor02");
         threadPoolConfigEntity.setPoolSize(100);
         threadPoolConfigEntity.setMaximumPoolSize(100);
         dynamicThreadPoolRedisTopic.publish(threadPoolConfigEntity);

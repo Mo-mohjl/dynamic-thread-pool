@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RList;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,6 +19,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/v1/dynamic/thread/pool/")
 public class DynamicThreadPoolController {
+    private final Logger logger = LoggerFactory.getLogger(DynamicThreadPoolController.class);
     @Resource
     public RedissonClient redissonClient;
     /**
@@ -28,6 +31,7 @@ public class DynamicThreadPoolController {
     public Response<List<ThreadPoolConfigEntity>> queryThreadPoolList() {
         try {
             RList<ThreadPoolConfigEntity> cacheList = redissonClient.getList("THREAD_POOL_CONFIG_LIST_KEY");
+            logger.info(JSON.toJSONString(cacheList));
             return Response.<List<ThreadPoolConfigEntity>>builder()
                     .code(Response.Code.SUCCESS.getCode())
                     .info(Response.Code.SUCCESS.getInfo())
